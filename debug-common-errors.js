@@ -23,24 +23,25 @@ Think about which debugging methods you found most useful and how you might appl
 // Program A
 // Description:
 // This program is intended to display a simple prompt in the console but fails to run.
-
-console.log("Welcome to the bootcamp
+const readline = require('readline-sync');
+console.log(readline.question("Welcome to the bootcamp"));
 
 // What’s Wrong?
+ //I have used readline to create prompt. Added closing quotes and brackets.
 
 
 // Program B
 // Description:
 // This code attempts to multiply each number in an array by 2 and display the results. However, it crashes at runtime.
 
-let numbers = [2, 4, "eight"];
+let numbers = [2, 4, 8];
 for (let i = 0; i < numbers.length; i++) {
   let doubled = numbers[i] * 2;
   console.log(doubled);
 }
 
 // What’s Wrong?
-
+//1. Instead of string eight use number eight.
 
 
 // Program C (Logic Error)
@@ -51,12 +52,20 @@ function isPrime(num) {
   if (num < 2) return false;
   for (let i = 2; i < num; i++) {
     if (num % i === 0) {
-      return true;  // Supposed to indicate num is NOT prime
+      return false;  // Supposed to indicate num is NOT prime
     }
   }
-  return false; // Supposed to indicate num IS prime
+  return true; // Supposed to indicate num IS prime
 }
 
 console.log(isPrime(7)); // Expected true but gets false
 
 // What’s Wrong?
+
+/*Let’s test it mentally with isPrime(7):
+7 < 2 → false, so skip the first line.
+Loop i from 2 to 6.
+For each i, check if 7 % i === 0 — it’s never true, so we never hit the return true.
+After the loop, we hit return false.
+So it returns false (meaning “not prime”), even though 7 is prime.
+That’s because you’re returning true when the number is divisible — but divisibility means not prime.*/
